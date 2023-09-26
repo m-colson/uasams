@@ -1,0 +1,32 @@
+---
+export const prerender = false;
+
+// import FilterBar from "../components/FilterBar.astro";
+import PageSelectBar from "../components/PageSelectBar.astro";
+import Seperator from "../components/Seperator.astro";
+import ShortScholarship from "../components/ShortScholarship.astro";
+import Layout from "../layouts/Layout.astro";
+
+// const queryString = Astro.url.searchParams.get("q");
+// const availablity = Astro.url.searchParams.get("av");
+const page = Astro.url.searchParams.get("page");
+
+const pageNum = parseInt(page ?? "1");
+
+const dateTime = new Date(Date.now()).toJSON();
+
+const results = await Astro.locals.pb
+    .collection("scholarships")
+    .getList(pageNum, 50, {
+        filter: `deadline > "${dateTime}"`,
+        sort: "deadline",
+    });
+
+console.log(results);
+
+const items = results.items;
+---
+
+<Layout title="Search - SAMS">
+    <PageSelectBar selected={pageNum} total={results.totalPages} />
+</Layout>

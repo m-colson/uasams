@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Login - UASAMS">
+    <div class="form_container">
+        <div id="loginfailure">
+            <h1>Failed to login</h1>
+        </div>
+        <form action="" id="login">
+            <div class="form_line">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Username"
+                />
+            </div>
+            <div class="form_line">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                />
+            </div>
+            <div class="form_line">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</Layout>
+
+<script>
+    import PocketBase from "pocketbase";
+
+    const db = new PocketBase("http://localhost:7001");
+
+    const loginForm = document.getElementById("login") as HTMLFormElement;
+
+    loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(loginForm);
+
+        db.collection("users")
+            .authWithPassword(
+                formData.get("username") as string,
+                formData.get("password") as string,
+            )
+            .then((resp) => {
+                db.authStore.save(resp.token, resp.record);
+
+                window.location.replace(
+                    new URLSearchParams(window.location.search).get(
+                        "redirect",
+                    ) ?? "/",
+                );
+            })
+            .catch((err) => {
+                const loginFailure = document.getElementById(
+                    "loginfailure",
+                ) as HTMLDivElement;
+                loginFailure.style.display = "flex";
+                setTimeout(() => {
+                    loginFailure.style.display = "none";
+                }, 3000);
+            });
+    });
+</script>
+
+<style>
+    .form_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 15rem;
+        width: 100%;
+    }
+
+    .form_line {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem;
+    }
+
+    #loginfailure {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
+        color: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+</style>

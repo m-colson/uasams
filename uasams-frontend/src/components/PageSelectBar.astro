@@ -1,0 +1,31 @@
+---
+export interface Props {
+    selected: number;
+    total: number;
+}
+
+const {selected, total} = Astro.props;
+
+---
+
+<div class="select_bar">
+    {
+        selected > 1 &&
+        <a href={`/viewall?page=${selected - 1}`}>Previous</a>
+    }
+    <span>{selected} / {total}</span>
+    {
+        selected < total &&
+        <a href={`/viewall?page=${selected + 1}`}>Next</a>
+    }
+</div>
+
+<style>
+    .select_bar {
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

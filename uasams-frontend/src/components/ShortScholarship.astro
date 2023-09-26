@@ -1,0 +1,51 @@
+---
+export interface Props {
+    name: string;
+    description: string;
+    deadline: string;
+}
+
+const { name, description, deadline } = Astro.props;
+
+const deadlineDate = new Date(deadline);
+---
+
+<div class="scholarship">
+    <div class="top_line">
+        <h1>{name}</h1>
+        <p class="scholarship_deadline">
+            Deadline: {deadlineDate.toLocaleDateString()}
+        </p>
+    </div>
+    <p>{description}</p>
+</div>
+
+<style lang="scss">
+    .scholarship {
+        width: 100%;
+
+        h1,
+        p {
+            margin: 0;
+        }
+
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .scholarship_deadline {
+        font-size: 0.75rem;
+        background-color: #a21526;
+
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+
+        color: #fff;
+    }
+
+    .top_line {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+</style>
