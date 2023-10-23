@@ -1,0 +1,36 @@
+routes
+    index.cpsn
+        format "html"
+        ;
+    view/index.cpsn 
+        format "html"
+        ;
+    login/index.cpsn
+        format "html"
+        ;
+    logout/index.cpsn
+        format "html"
+        ;
+    scholarship/index.cpsn
+        format "html"
+        ;
+    application/index.cpsn
+        format "html"
+        ;
+    applications/index.cpsn
+        format "html"
+        ;
+    profile/index.cpsn
+        format "html"
+        ;
+    fragments/topscholarships.cpsn
+        format "html"
+        ;
+    api/v1/setauth.cpsn
+        format "html"
+        ;
+    fragments/profile.cpsn
+        format "html"
+        ;
+    ;
+;

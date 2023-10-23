@@ -1,0 +1,5 @@
+[
+    :div(class "header-row";) [
+        :h1 "hi, \{name}" ## name {user} #["username"];
+    ]
+] ## user "../api/v1/getme.cpsn" #import();

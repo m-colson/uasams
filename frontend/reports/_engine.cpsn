@@ -1,0 +1,6 @@
+[
+    "java"
+    "-cp" "./reportengine/bin;./reportengine/lib/json-20230618.jar" "App"
+]
+#importprocess("cpsn")
+#persist()

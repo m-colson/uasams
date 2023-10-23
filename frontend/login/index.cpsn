@@ -1,0 +1,40 @@
+[
+    :html [
+        :head [
+            :meta(charset "utf-8";);
+            :meta(name "description" content "UA SAMS";);
+            :meta(name "viewport" content "width=device-width, initial-scale=1";);
+            :title "Hello World"
+            :style "../_styles.css" #import()
+            :style "_styles.css" #import()
+            % add htmx cdn
+            :script(src "https://unpkg.com/htmx.org/dist/htmx.min.js";) []
+        ]
+        :body [
+            \ "../components/_navbar.cpsn" #import()
+            :div(class "container";) [
+                :h1 "Login"
+                :div(id "loginfailure";) [
+                ]
+                :form(
+                    id "loginForm"
+                    hx-post "/api/v1/setauth.cpsn"
+                    hx-swap "none"
+                    ;
+                ) [
+                    :div(class "form-group";) [
+                        :label(for "identity";) "Username/Email"
+                        :input(type "text" class "form-control" id "identity" name "identity" autocomplete "username";);
+                    ]
+                    :div(class "form-group";) [
+                        :label(for "password";) "Password"
+                        :input(type "password" class "form-control" id "password" name "password" placeholder "Password" autocomplete "current-password";);
+                    ]
+                    :div(class "form-group";) [
+                        :input(type "submit" class "form-submit";);
+                    ]
+                ]
+            ]
+        ]
+    ]
+]

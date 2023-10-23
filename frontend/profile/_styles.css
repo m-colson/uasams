@@ -1,0 +1,10 @@
+.header-row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}
+
+.header-row h1 {
+    margin: 0rem;
+}

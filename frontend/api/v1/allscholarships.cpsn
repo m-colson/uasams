@@ -1,0 +1,8 @@
+"http://localhost:7001/api/collections/scholarships/records?\{query}"
+#where(
+    query "page=1&pageSize=1000&filter=(deadline%20>%20@now)&sort=deadline"
+    ;
+)
+#importhttp("json" ;)
+#indexor("items" [])
+#persistfor("60s")

@@ -1,0 +1,19 @@
+"../api/v1/userapplications.cpsn"
+#import()
+#map(["" "info"]
+    :a(class "application" href "/application?id=\{id}" #where(id {info} #["id"];);) [
+        :div(class "application-header";) [
+            :h2 {info} #["expand" "scholarship" "name"]
+            :p(class "application-date";)
+                "Updated: \{updated}"
+                #where(
+                    updated
+                        {info} 
+                        #["updated"]
+                        #intoDateTime("2006-01-02 15:04:05.999999999Z")
+                        #formatDateTime("01/02/06 3:04 PM")
+                    ;
+                )
+        ]
+    ]
+)

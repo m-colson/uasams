@@ -1,0 +1,35 @@
+{allscholarships}
+#filter(["ship"] 
+    {userapplications}
+    #any(["app"]    
+        {app}
+        #["scholarship"]
+        #eq({ship} #["id"])
+    )
+    #then("")
+    #else("true")
+) % remove all scholarships that the user has applied to
+#filter(["ship"]
+    {me} #["match_data"] #hasthen("gpa" ["gpa"]
+        {ship} #["match_criteria"] #hasthen("gpa" ["critBounds"]
+            {critBounds}
+            #hasthen("lower" ["critLower"]
+                {gpa} #num>=({critLower})
+            )
+            #else("true")
+            #and(
+                {critBounds}
+                #hasthen("upper" ["critUpper"]
+                    {gpa} #num<=({critUpper})
+                )
+                #else("true")
+            )
+        ) #else("true")
+    ) #else("true")
+) % remove all scholarships that the user doesnt match the gpa requirement for
+#where(
+    allscholarships "allscholarships.cpsn" #import()
+    userapplications "userapplications.cpsn" #import()
+    me "getme.cpsn" #import()
+    ;
+)

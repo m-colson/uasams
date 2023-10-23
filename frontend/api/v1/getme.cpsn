@@ -1,0 +1,10 @@
+{req} #["cookies"] #hasthen("a" ["auth"] 
+    "http://localhost:7001/api/collections/users/records/\{id}"
+    #importhttp("json" headers Authorization "Bearer \{jwt}";;)
+    #where(
+        authsplit {auth} #split("\\:")
+        id {authsplit} #["0"]
+        jwt {authsplit} #["1"]
+        ;
+    )
+) #else(;)

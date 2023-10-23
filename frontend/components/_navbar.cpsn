@@ -1,0 +1,19 @@
+[
+    :div(class "nav-container";) [
+        :div(class "nav-list";) [
+            :a (href "/";) "Home"
+            \ {req} #["cookies"] #hasthen("a" [""] [
+                :div(class "nav-dropdown";) [
+                    :a (href "/profile";) "Profile"
+                    :div(class "nav-dropdown-content";) [
+                        :a (href "/applications";) "Applications"
+                        :a (href "/view";) "Top Scholarships"
+                        :a (href "/logout";) "Logout"
+                    ]
+                ]
+            ]) #else ([
+                :a (href "/login";) "Login"
+            ])
+        ]
+    ]
+]

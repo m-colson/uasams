@@ -1,0 +1,39 @@
+"../api/v1/match.cpsn"
+#import()
+#map(["" "info"]
+    :a(class "scholarship" href "/scholarship?id=\{id}" #where(id {info} #["id"];);) [
+        :div(class "scholarship-header";) [
+            :h2 {info} #["name"]
+            :p(class "scholarship-date";)
+                {info} 
+                #["deadline"]
+                #intoDateTime("2006-01-02 15:04:05.999999999Z")
+                #formatDateTime("01/02/06 3:04 PM")
+        ]
+        :div(class "criteria-list";) [
+            \{gpaLine}
+        ] #where(
+            criteria {info} #["match_criteria"]
+            gpaLine {criteria} #has("gpa") #then([
+                :p(class "criteria";) "gpa\{lower}\{upper}"
+                #where(
+                    gpa {criteria} #["gpa"]
+                    lower {gpa} #has("lower") #then(" ≥ \{l}" #where(l {gpa} #["lower"];) ;) #else("")
+                    upper {gpa} #has("upper") #then(" ≤ \{u}" #where(u {gpa} #["upper"];) ;) #else("")
+                    ;
+                )
+            ]) #else([])
+            ;
+        )
+        :p "\{desc}..."
+            #where(
+                desc
+                    {info}
+                    #["description"]
+                    #split("")
+                    #slice("0" "140" "")
+                    #join("")
+                ;
+            )
+    ]
+)

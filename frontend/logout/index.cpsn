@@ -1,0 +1,28 @@
+[
+    :html [
+        :head [
+            :meta(charset "utf-8";);
+            :meta(name "description" content "UA SAMS";);
+            :meta(name "viewport" content "width=device-width, initial-scale=1";);
+            :title "Hello World"
+            :style "../_styles.css" #import()
+            :style "_styles.css" #import()
+            % add htmx cdn
+            :script(src "https://unpkg.com/htmx.org/dist/htmx.min.js";) []
+        ]
+        :body [
+            :div(class "container";) [
+                :h1 "Logged out!"
+                :p "You have been logged out."
+                :a(href "/";) "Go back to the homepage"
+            ]
+        ]
+    ]
+]
+#where(
+    `` {resp} #["headers"] #mapa(["headers"] [
+            \{headers}
+            ["Set-Cookie" "a=0:0; Max-Age=0; Path=/; HttpOnly; SameSite=strict"]
+        ])
+    ;
+)

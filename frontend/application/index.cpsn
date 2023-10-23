@@ -1,0 +1,15 @@
+[
+    :html [
+        :head [
+            :meta(charset "utf-8";);
+            :meta(name "description" content "UA SAMS";);
+            :meta(name "viewport" content "width=device-width, initial-scale=1";);
+            :title "Hello World"
+            :style "../_styles.css" #import()
+            :style "_styles.css" #import()
+        ]
+        :body [
+            \ "../components/_navbar.cpsn" #import()
+        ]
+    ]
+]

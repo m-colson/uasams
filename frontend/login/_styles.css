@@ -1,0 +1,63 @@
+#loginfailure {
+    color: red;
+}
+
+#loginfailure p {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: calc(100svh - 4rem);
+
+    color: #282c34;
+}
+
+.container h1 {
+    margin-bottom: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0.5rem;
+}
+
+.form-group input {
+    border-style: solid;
+    border-radius: 1rem;
+    border-color: #282c34;
+
+
+    padding: 0.5rem;
+
+    transition: scale 0.2s ease-in-out;
+}
+
+.form-group input:not([type="submit"]) {
+    color: #282c34;
+    background-color: #fff;
+}
+
+.form-group input:not([type="submit"]):focus {
+    outline: none;
+
+    scale: 105%;
+}
+
+.form-submit {
+    margin-left: auto;
+
+    background-color: #0f385e;
+    color: #fff;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+    scale: 105%;
+}

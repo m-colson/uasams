@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    color: #282c34;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.scholarships {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+    width: 100%;
+}
+
+.scholarship {
+    text-decoration: none;
+
+    background-color: #dddddd;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+    transition: scale 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    box-shadow: 0.125rem 0.25rem 0.5rem 0px #282c34;
+}
+
+.scholarship:hover {
+    scale: 102%;
+    box-shadow: 0.125rem 0.5rem 0.75rem 0px #282c34;
+}
+
+.scholarship p {
+    margin: 0;
+    padding: 0;
+
+    color: #282c34;
+}
+
+.scholarship-header p {
+    background-color: #0f385e;
+    color: #fff;
+
+    border-radius: 1rem;
+
+    margin: 0;
+    padding: 0.5rem;
+
+    margin-left: auto;
+}
+
+.scholarship-header h2 {
+    margin: 0;
+    color: #282c34;
+}
+
+.scholarship-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+}
+
+.criteria-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+.criteria {
+    font-weight: bold;
+}

@@ -1,0 +1,67 @@
+[
+    :html [
+        :head [
+            :meta(charset "utf-8";);
+            :meta(name "description" content "UA SAMS";);
+            :meta(name "viewport" content "width=device-width, initial-scale=1";);
+            :title "Hello World"
+            :style "../_styles.css" #import()
+            :style "_styles.css" #import()
+        ]
+        :body [
+            \ "../components/_navbar.cpsn" #import()
+            :div(class "container";) [
+                :h1 {info} #["name"]
+                :div(class "brief-line";) [
+                    :p(class "criteria";)
+                        "deadline = \{deadline}"
+                        #where(
+                            deadline
+                                {info}
+                                #["deadline"]
+                                #intoDateTime("2006-01-02 15:04:05.999999999Z")
+                                #formatDateTime("01/02/06 3:04 PM")
+                            ;
+                        )
+                    \{gpaLine}
+                ]
+                :div(class "description";) [
+                    :p {info} #["description"]
+                ]
+                :h1 "Apply"
+                :form(class "apply-form";) [
+                    :div(class "form-group";) [
+                        :label(for "apply-essay";) "Essay"
+                        :input(type "file" id "apply-essay" name "essay" placeholder "Essay";);
+                    ]
+                    :div(class "form-group";) [
+                        :input(type "submit" id "apply-submit" value "Submit";);
+                    ]
+                ]
+            ]
+        ]
+    ]
+]
+#where(
+    id {req} #["query" "id"]
+    info
+        "http://localhost:7001/api/collections/scholarships/records/\{id}"
+        #importhttp("json" headers Authorization "Bearer \{jwt}";;)
+        #where(
+            auth {req} #["cookies" "a"]
+            authsplit {auth} #split("\\:")
+            jwt {authsplit} #["1"]
+            ;
+        )
+    criteria {info} #["match_criteria"]
+    gpaLine {criteria} #has("gpa") #then([
+        :p(class "criteria";) "gpa\{lower}\{upper}"
+        #where(
+            gpa {criteria} #["gpa"]
+            lower {gpa} #has("lower") #then(" ≥ \{l}" #where(l {gpa} #["lower"];) ;) #else("")
+            upper {gpa} #has("upper") #then(" ≤ \{u}" #where(u {gpa} #["upper"];) ;) #else("")
+            ;
+        )
+    ]) #else([])
+    ;
+)

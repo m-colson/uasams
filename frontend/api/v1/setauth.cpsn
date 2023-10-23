@@ -1,0 +1,34 @@
+{r} #hasthen("code" [""] [ 
+    :div(id "loginfailure" hx-swap-oob="true";) [
+        :p {r} #["message"]
+    ]
+])
+#else(
+    []
+    #where(
+        token {r} #["token"]
+        id {r} #["record" "id"]
+        a "\{id}:\{token}"
+        `` {resp} #["headers"] #mapa(["v"] [
+                \{v} 
+                ["HX-Redirect" "/view"] 
+                ["Set-Cookie" "a=\{a}; Secure; HttpOnly; Path=/; SameSite=Strict"]
+            ])
+        ;
+    )
+)
+#where(
+    getFormValue {req} #["getFormValue"]
+    r
+        "http://localhost:7001/api/collections/users/auth-with-password"
+        #importhttp(
+            "json"
+            method "POST"
+            bodyJSON
+                identity {getFormValue} #("identity")
+                password {getFormValue} #("password")
+                ;
+            ;
+        )
+    ;
+)

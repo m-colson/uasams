@@ -1,0 +1,17 @@
+{req}
+#["cookies"]
+#hasthen("a" ["authorization"]
+    {engine}
+    #send(
+        message "applicantReport" 
+        args for {req} #["query" "for"]; 
+        authorization {authorization}
+        ;
+    )
+    ## engine "_engine.cpsn" #import();
+)
+#else(
+    status "401"
+    message "Unauthorized"
+    ;
+)
